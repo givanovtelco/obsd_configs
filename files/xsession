@@ -1,0 +1,19 @@
+#!/bin/sh
+setxkbmap -option grp:alt_shift_toggle,grp_led:scroll us,bg -variant ,phonetic
+DUAL=`xrandr | awk '{print $1}' | grep VGA-1`
+if [ !  -z  $DUAL ]; then
+	xrandr --output VGA-1 --mode 1920x1080 --output eDP-1 --mode 1920x1080 --same-as VGA-1
+fi
+
+[[ -d /usr/local/share/fonts/go ]] && xset +fp /usr/local/share/fonts/go
+[[ -d /usr/local/share/fonts/inconsolata ]] && xset +fp /usr/local/share/fonts/inconsolata
+[[ -d /usr/local/share/fonts/terminus ]] && xset +fp /usr/local/share/fonts/terminus
+[[ -d /usr/local/share/fonts/noto ]] && xset +fp  /usr/local/share/fonts/noto
+[[ -d /usr/local/share/fonts/spleen ]] && xset +fp  /usr/local/share/fonts/spleen
+xset fp rehash
+. /home/givanov/.profile
+xrdb -merge ~/.Xresources
+feh --bg-scale ~/Background/wall.jpg 
+xset b off
+fontsrv &
+exec twm
