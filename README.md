@@ -16,3 +16,5 @@ pkg_add terminus-fonts go-fonts spleen inconsolata-font
 That's it twm, xterm and tmux are in the base. 
 
 ### Files
+
+![Screenshot](screenshot.png)
