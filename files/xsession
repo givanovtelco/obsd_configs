@@ -1,4 +1,5 @@
 #!/bin/sh
+
 setxkbmap -option grp:alt_shift_toggle,grp_led:scroll us,bg -variant ,phonetic
 DUAL=`xrandr | awk '{print $1}' | grep VGA-1`
 if [ !  -z  $DUAL ]; then
@@ -9,11 +10,17 @@ fi
 [[ -d /usr/local/share/fonts/inconsolata ]] && xset +fp /usr/local/share/fonts/inconsolata
 [[ -d /usr/local/share/fonts/terminus ]] && xset +fp /usr/local/share/fonts/terminus
 [[ -d /usr/local/share/fonts/noto ]] && xset +fp  /usr/local/share/fonts/noto
-[[ -d /usr/local/share/fonts/spleen ]] && xset +fp  /usr/local/share/fonts/spleen
+[[ -d /usr/loca/share/fonts/adobe-source-code-pro ]] && xset +fp /usr/local/share/fonts/adobe-source-code-pro
 xset fp rehash
 . /home/givanov/.profile
 xrdb -merge ~/.Xresources
-feh --bg-scale ~/Background/wall.jpg 
+feh --bg-scale ~/Backgrounds/shoes.jpg 
 xset b off
 fontsrv &
-exec twm
+xidle -timeout 600 -program "/usr/X11R6/bin/xlock" &
+
+if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+        eval `dbus-launch --sh-syntax --exit-with-x11`
+fi
+
+exec cwm
